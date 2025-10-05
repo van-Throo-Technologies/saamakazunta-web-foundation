@@ -9,27 +9,33 @@ const HetBestuur = () => {
   const bestuursleden = [
     {
       id: 1,
+      naam: "Prof. dr. Franklin Jabini",
+      functie: "Voorzitter",
+      beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
+    },
+    {
+      id: 2,
       naam: "Merina Jessamy-Eduards",
       functie: "Functie",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
       image: merinaImage,
     },
     {
-      id: 2,
+      id: 3,
       naam: "Lenie Eduards",
       functie: "Functie",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
       image: lenieImage,
     },
     {
-      id: 3,
+      id: 4,
       naam: "Drs. Elvis Pokie",
       functie: "Penningmeester",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
       image: elvisImage,
     },
     {
-      id: 4,
+      id: 5,
       naam: "Mr. Lourencina Adams",
       functie: "Secretaris",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
