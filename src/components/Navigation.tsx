@@ -11,6 +11,7 @@ const Navigation = () => {
     { title: "Home", path: "/" },
     { title: "Over Ons", path: "/over-ons" },
     { title: "Het Bestuur", path: "/het-bestuur" },
+    { title: "Onze Activiteiten", path: "/onze-activiteiten" },
     { title: "Contact", path: "/contact" },
   ];
 

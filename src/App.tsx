@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import OverOns from "./pages/OverOns";
 import HetBestuur from "./pages/HetBestuur";
+import OnzeActiviteiten from "./pages/OnzeActiviteiten";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/over-ons" element={<OverOns />} />
               <Route path="/het-bestuur" element={<HetBestuur />} />
+              <Route path="/onze-activiteiten" element={<OnzeActiviteiten />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
