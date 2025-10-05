@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -88,7 +88,12 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">E-mail</h3>
-                      <p className="text-muted-foreground">info@saamakazunta.sr</p>
+                      <a 
+                        href="mailto:saaamakazunta@gmail.com" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        saaamakazunta@gmail.com
+                      </a>
                     </div>
                   </div>
                   
@@ -97,11 +102,33 @@ const Contact = () => {
                       <Phone className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Telefoon</h3>
-                      <p className="text-muted-foreground">+597 XXX-XXXX</p>
+                      <h3 className="font-semibold mb-1">Telefoon / WhatsApp</h3>
+                      <a 
+                        href="tel:+5978566507" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        +597 856 6507
+                      </a>
                     </div>
                   </div>
                   
+                  <div className="flex items-start gap-4">
+                    <div className="bg-primary/10 p-3 rounded-lg">
+                      <Facebook className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Facebook</h3>
+                      <a 
+                        href="https://www.facebook.com/SUZkoawan" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        SUZkoawan
+                      </a>
+                    </div>
+                  </div>
+
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/10 p-3 rounded-lg">
                       <MapPin className="h-6 w-6 text-primary" />
@@ -111,6 +138,9 @@ const Contact = () => {
                       <p className="text-muted-foreground">
                         Paramaribo<br />
                         Suriname
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        KKF: 45961
                       </p>
                     </div>
                   </div>
