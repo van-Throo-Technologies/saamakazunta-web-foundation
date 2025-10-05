@@ -3,6 +3,7 @@ import { User } from "lucide-react";
 import merinaImage from "@/assets/merina-jessamy-eduards.jpeg";
 import lenieImage from "@/assets/lenie-eduards.jpeg";
 import elvisImage from "@/assets/elvis-pokie.jpeg";
+import lourencinaImage from "@/assets/lourencina-adams.jpeg";
 
 const HetBestuur = () => {
   const bestuursleden = [
@@ -29,9 +30,10 @@ const HetBestuur = () => {
     },
     {
       id: 4,
-      naam: "Naam Bestuurslid 4",
-      functie: "Functie",
+      naam: "Mr. Lourencina Adams",
+      functie: "Secretaris",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
+      image: lourencinaImage,
     },
   ];
 
