@@ -1,19 +1,23 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { User } from "lucide-react";
+import merinaImage from "@/assets/merina-jessamy-eduards.jpeg";
+import lenieImage from "@/assets/lenie-eduards.jpeg";
 
 const HetBestuur = () => {
   const bestuursleden = [
     {
       id: 1,
-      naam: "Naam Bestuurslid 1",
+      naam: "Merina Jessamy-Eduards",
       functie: "Functie",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
+      image: merinaImage,
     },
     {
       id: 2,
-      naam: "Naam Bestuurslid 2",
+      naam: "Lenie Eduards",
       functie: "Functie",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
+      image: lenieImage,
     },
     {
       id: 3,
@@ -46,9 +50,17 @@ const HetBestuur = () => {
                   <div className={`grid md:grid-cols-2 gap-6 ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
                     {/* Image Placeholder */}
                     <div className={`${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
-                      <div className="aspect-square bg-muted flex items-center justify-center">
-                        <User className="h-24 w-24 text-muted-foreground" />
-                      </div>
+                      {lid.image ? (
+                        <img
+                          src={lid.image}
+                          alt={lid.naam}
+                          className="w-full h-full object-cover aspect-square"
+                        />
+                      ) : (
+                        <div className="aspect-square bg-muted flex items-center justify-center">
+                          <User className="h-24 w-24 text-muted-foreground" />
+                        </div>
+                      )}
                     </div>
 
                     {/* Content */}
