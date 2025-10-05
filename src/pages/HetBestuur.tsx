@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { User } from "lucide-react";
 import merinaImage from "@/assets/merina-jessamy-eduards.jpeg";
 import lenieImage from "@/assets/lenie-eduards.jpeg";
+import elvisImage from "@/assets/elvis-pokie.jpeg";
 
 const HetBestuur = () => {
   const bestuursleden = [
@@ -21,9 +22,10 @@ const HetBestuur = () => {
     },
     {
       id: 3,
-      naam: "Naam Bestuurslid 3",
-      functie: "Functie",
+      naam: "Drs. Elvis Pokie",
+      functie: "Penningmeester",
       beschrijving: "Korte beschrijving over het bestuurslid komt hier.",
+      image: elvisImage,
     },
     {
       id: 4,
