@@ -12,7 +12,7 @@ const Navigation = () => {
     { title: "Over Ons", path: "/over-ons" },
     { title: "Het Bestuur", path: "/het-bestuur" },
     { title: "Onze Activiteiten", path: "/onze-activiteiten" },
-    { title: "Community", path: "/community" },
+    { title: "Gaangaza", path: "/community" },
     { title: "Contact", path: "/contact" },
   ];
 

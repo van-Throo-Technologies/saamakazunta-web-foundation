@@ -169,7 +169,7 @@ const Community = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Saamaka Gemeenschap</h1>
+          <h1 className="text-3xl font-bold">Gaangaza</h1>
           <Button onClick={handleLogout} variant="outline">
             Uitloggen
           </Button>
