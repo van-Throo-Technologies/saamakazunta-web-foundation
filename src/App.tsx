@@ -11,6 +11,8 @@ import HetBestuur from "./pages/HetBestuur";
 import OnzeActiviteiten from "./pages/OnzeActiviteiten";
 import ActiviteitDetail from "./pages/ActiviteitDetail";
 import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
+import Community from "./pages/Community";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
               <Route path="/onze-activiteiten" element={<OnzeActiviteiten />} />
               <Route path="/activiteit/:id" element={<ActiviteitDetail />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/community" element={<Community />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
