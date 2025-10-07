@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Heart, MessageCircle, Send } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { nl } from "date-fns/locale";
+import { MediaUpload } from "@/components/MediaUpload";
 
 interface Profile {
   id: string;
@@ -24,6 +25,8 @@ interface Post {
   likes_count: number;
   comments_count: number;
   user_id: string;
+  media_type: string | null;
+  media_url: string | null;
   profiles: Profile;
 }
 
@@ -32,6 +35,7 @@ const Community = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [newPost, setNewPost] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState<{ file: File | Blob; type: string; preview?: string } | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -107,34 +111,75 @@ const Community = () => {
     }
   };
 
+  const handleMediaSelect = (file: File | Blob, type: "image" | "video" | "audio") => {
+    const preview = URL.createObjectURL(file);
+    setSelectedMedia({ file, type, preview });
+  };
+
+  const handleClearMedia = () => {
+    if (selectedMedia?.preview) {
+      URL.revokeObjectURL(selectedMedia.preview);
+    }
+    setSelectedMedia(null);
+  };
+
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newPost.trim() || !user) return;
+    if ((!newPost.trim() && !selectedMedia) || !user) return;
 
     setLoading(true);
-    const { error } = await supabase
-      .from('posts')
-      .insert([
-        {
-          content: newPost,
-          user_id: user.id,
-        }
-      ]);
 
-    if (error) {
+    try {
+      let mediaUrl = null;
+      let mediaType = null;
+
+      // Upload media if present
+      if (selectedMedia) {
+        const fileExt = selectedMedia.type === "audio" ? "webm" : selectedMedia.file instanceof File ? selectedMedia.file.name.split('.').pop() : selectedMedia.type;
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('gaangaza-media')
+          .upload(fileName, selectedMedia.file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('gaangaza-media')
+          .getPublicUrl(fileName);
+
+        mediaUrl = publicUrl;
+        mediaType = selectedMedia.type;
+      }
+
+      const { error } = await supabase
+        .from('posts')
+        .insert([
+          {
+            content: newPost,
+            user_id: user.id,
+            media_url: mediaUrl,
+            media_type: mediaType,
+          }
+        ]);
+
+      if (error) throw error;
+
+      setNewPost("");
+      handleClearMedia();
+      toast({
+        title: "Post geplaatst!",
+        description: "Je bericht is succesvol gedeeld.",
+      });
+    } catch (error: any) {
       toast({
         title: "Fout bij plaatsen post",
         description: error.message,
         variant: "destructive",
       });
-    } else {
-      setNewPost("");
-      toast({
-        title: "Post geplaatst!",
-        description: "Je bericht is succesvol gedeeld.",
-      });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleLogout = async () => {
@@ -180,14 +225,19 @@ const Community = () => {
             <h2 className="text-xl font-semibold">Deel je gedachten</h2>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleCreatePost}>
+            <form onSubmit={handleCreatePost} className="space-y-4">
               <Textarea
                 placeholder="Waar denk je aan?"
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
-                className="min-h-[100px] mb-4"
+                className="min-h-[100px]"
               />
-              <Button type="submit" disabled={loading || !newPost.trim()}>
+              <MediaUpload
+                onMediaSelect={handleMediaSelect}
+                selectedMedia={selectedMedia}
+                onClearMedia={handleClearMedia}
+              />
+              <Button type="submit" disabled={loading || (!newPost.trim() && !selectedMedia)}>
                 <Send className="mr-2 h-4 w-4" />
                 Plaatsen
               </Button>
@@ -220,8 +270,27 @@ const Community = () => {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <p className="whitespace-pre-wrap">{post.content}</p>
+              <CardContent className="space-y-4">
+                {post.content && <p className="whitespace-pre-wrap">{post.content}</p>}
+                {post.media_type === "image" && post.media_url && (
+                  <img
+                    src={post.media_url}
+                    alt="Post media"
+                    className="rounded-lg max-h-96 w-full object-cover"
+                  />
+                )}
+                {post.media_type === "video" && post.media_url && (
+                  <video
+                    src={post.media_url}
+                    controls
+                    className="rounded-lg max-h-96 w-full"
+                  />
+                )}
+                {post.media_type === "audio" && post.media_url && (
+                  <audio controls className="w-full">
+                    <source src={post.media_url} type="audio/webm" />
+                  </audio>
+                )}
               </CardContent>
               <CardFooter className="gap-4">
                 <Button

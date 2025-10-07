@@ -100,6 +100,8 @@ export type Database = {
           id: string
           image_url: string | null
           likes_count: number | null
+          media_type: string | null
+          media_url: string | null
           updated_at: string
           user_id: string
         }
@@ -110,6 +112,8 @@ export type Database = {
           id?: string
           image_url?: string | null
           likes_count?: number | null
+          media_type?: string | null
+          media_url?: string | null
           updated_at?: string
           user_id: string
         }
@@ -120,6 +124,8 @@ export type Database = {
           id?: string
           image_url?: string | null
           likes_count?: number | null
+          media_type?: string | null
+          media_url?: string | null
           updated_at?: string
           user_id?: string
         }
